@@ -52,26 +52,31 @@
 	surcharge_vs_Fare_amount
 
 
+# converting longitude and latitude from Degree to Radian
 
-	x = train[,10:11]*0.0174533   # converting longitude and latitude from Degree to Radian
+	x = train[,10:11]*0.0174533   
 	y =train[,14:15]*0.0174533
 
-	distance = distVincentyEllipsoid(x, y)   #calculating the distance using longitude and latitude
-	distance = as.data.frame(distance)
+ #calculating the distance using longitude and latitude
+ 
+		distance = distVincentyEllipsoid(x, y)  
+		distance = as.data.frame(distance)
 
-	options(scipen = 999) #conevrt exponantioal values to numaric
+		options(scipen = 999) #conevrt exponantioal values to numaric
+	
+	#subserring the columns on the basis of Domain Knowledge
 
-	train = train[c(4,5,6,9,12,17,18)] #subserring the columns on the basis of Domain Knowledge
+		train = train[c(4,5,6,9,12,17,18)] 
 
-	train = cbind(train,distance)   # using distance as predictor
+		train = cbind(train,distance)   # using distance as predictor
 
-	distance  = NULL
-	x= NULL
-	y=NULL
+		distance  = NULL
+		x= NULL
+		y=NULL
 
 
-	train$passenger_count = as.factor(train$passenger_count) #converting to respective data type
-	train$rate_code = as.factor(train$rate_code)
+		train$passenger_count = as.factor(train$passenger_count) #converting to respective data type
+		train$rate_code = as.factor(train$rate_code)
 	
 #missing values detection by column
 
